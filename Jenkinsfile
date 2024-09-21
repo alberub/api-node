@@ -26,8 +26,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: "${SONARQUBE_CREDENTIALS_ID}", passwordVariable: 'SONAR_PASSWORD', usernameVariable: 'SONAR_USER')]) {
-                        sh '''
-                        npm install -g sonar-scanner
+                        sh '''                        
                         sonar-scanner \
                         -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
                         -Dsonar.projectName=${SONAR_PROJECT_NAME} \
