@@ -10,11 +10,37 @@ pipeline {
         SUBNET_ID = 'subnet-0b9ef3f7c5d6314dd'
         SECURITY_GROUP = 'sg-0f80801807bd738a1'
         AWS_CREDENTIALS_ID = 'fad6a0e9-8c3d-469d-b6c3-62dbd220fbaa'
+        SONARQUBE_URL = 'http://198.199.86.210:9000'
+        SONARQUBE_CREDENTIALS_ID = 'sonar'
+        SONAR_PROJECT_KEY = 'primer-escaneo' // Reemplaza con la clave de tu proyecto
+        SONAR_PROJECT_NAME = 'api-node' // Reemplaza con el nombre de tu proyecto
+        SONAR_PROJECT_VERSION = '1.0'
     }
     stages {
         stage('Acceder al repositorio') {
             steps {
                 git 'https://github.com/alberub/api-node'
+            }
+        }
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: "${SONARQUBE_CREDENTIALS_ID}", passwordVariable: 'SONAR_PASSWORD', usernameVariable: 'SONAR_USER')]) {
+                        sh '''
+                        npm install -g sonar-scanner
+                        sonar-scanner \
+                        -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
+                        -Dsonar.projectName=${SONAR_PROJECT_NAME} \
+                        -Dsonar.projectVersion=${SONAR_PROJECT_VERSION} \
+                        -Dsonar.host.url=${SONARQUBE_URL} \
+                        -Dsonar.login=$SONAR_USER \
+                        -Dsonar.password=$SONAR_PASSWORD \
+                        -Dsonar.sourceEncoding=UTF-8 \
+                        -Dsonar.sources=. \
+                        -Dsonar.exclusions=**/node_modules/**
+                        '''
+                    }
+                }
             }
         }
         stage('Crea la imagen de Docker') {
