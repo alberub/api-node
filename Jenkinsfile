@@ -20,8 +20,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube server') {
-                    sh '''
-                    npm install -g sonar-scanner
+                    sh '''                    
                     sonar-scanner \
                     -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
                     -Dsonar.projectName=${SONAR_PROJECT_NAME} \
