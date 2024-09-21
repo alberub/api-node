@@ -11,7 +11,7 @@ pipeline {
         SECURITY_GROUP = 'sg-0f80801807bd738a1'
         AWS_CREDENTIALS_ID = 'fad6a0e9-8c3d-469d-b6c3-62dbd220fbaa'
         SONARQUBE_URL = 'http://198.199.86.210:9000'
-        SONARQUBE_CREDENTIALS_ID = 'sonar'
+        SONARQUBE_CREDENTIALS_ID = 'sonarqube-credentials'
         SONAR_PROJECT_KEY = 'primer-escaneo' // Reemplaza con la clave de tu proyecto
         SONAR_PROJECT_NAME = 'api-node' // Reemplaza con el nombre de tu proyecto
         SONAR_PROJECT_VERSION = '1.0'
