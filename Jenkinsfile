@@ -10,6 +10,9 @@ pipeline {
         SUBNET_ID = 'subnet-0b9ef3f7c5d6314dd'
         SECURITY_GROUP = 'sg-0f80801807bd738a1'
         AWS_CREDENTIALS_ID = 'fad6a0e9-8c3d-469d-b6c3-62dbd220fbaa'
+        SONAR_PROJECT_KEY = 'primer-escaneo'
+        SONAR_PROJECT_NAME = 'api-node'
+        SONAR_PROJECT_VERSION = '1.0'
     }
     stages {
         stage('Acceder al repositorio') {
