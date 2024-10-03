@@ -79,10 +79,20 @@ pipeline {
                             \\"name\\": \\"node-api-container\\",
                             \\"image\\": \\"${DOCKER_IMAGE}\\",
                             \\"portMappings\\": [{
-                                \\"containerPort\\": 3000,
-                                \\"hostPort\\": 3000,
+                                \\"containerPort\\": ${PORT},
+                                \\"hostPort\\": ${PORT},
                                 \\"protocol\\": \\"tcp\\"
-                            }]
+                            }],
+                            \\"environment\\": [
+                                {
+                                    \\"name\\": \\"PORT\\",
+                                    \\"value\\": \\"${PORT}\\"
+                                },
+                                {
+                                    \\"name\\": \\"DB_CONNECTION_STRING\\",
+                                    \\"value\\": \\"${DB_CONNECTION_STRING}\\"
+                                }
+                            ]
                         }]"
                         '''
                     }
